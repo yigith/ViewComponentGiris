@@ -1,0 +1,35 @@
+﻿@inject Database  veri
+@model HomeIndexViewModel
+@{
+    ViewData["Title"] = "Home Page";
+    var mesaj = "I love tag helpers :)";
+}
+
+ilk kategori: @veri.GetCategories().FirstOrDefault()
+
+@await  Component.InvokeAsync("CategoriesList")
+
+<vc:categories-list></vc:categories-list>
+
+@Html.Partial("_Aciklama")
+
+@{ Html.RenderPartial("_Aciklama"); }
+
+@await Html.PartialAsync("_Aciklama")
+
+@{ await Html.RenderPartialAsync("_Aciklama"); }
+
+<partial name="_Aciklama" />
+
+@await Html.PartialAsync("_Mesaj", "I love async methods <3")
+
+<partial name="_Mesaj" model="mesaj" />
+
+<partial name="_Mesaj" model='"I love internet :)"' />
+
+<partial name="_Mesaj" model="Model.Message" />
+
+<partial name="_Mesaj" for="Message" />
+
+
+
